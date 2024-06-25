@@ -1,0 +1,36 @@
+ /*  S = abcbacbbac  t = abc  → unique
+S = abcbacbbac  t = abbc → duplicate
+S = abcbacbbac  t = abcp 
+By analyzing the above 3 cases, the approach is →
+Take 2 hashmaps. One will store the cnt of char present in s & another will store the cnt of char present in t. 
+Now traverse t & ans = min(ans, mp1[t[i]] / mp2[t2[i]] )   if substring matches the t then remove that substring from s.  */
+
+
+import java.util.*;
+public class amazonOA {
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        String s = sc.next();
+        String t = sc.next();
+        HashMap<Character,Integer> hm1=new HashMap<>();
+        HashMap<Character,Integer> hm2=new HashMap<>();
+        for(char s1: s.toCharArray()){
+            hm1.put(s1, hm1.getOrDefault(s1,0)+1);
+        }
+        for(char t1: t.toCharArray()){
+            hm2.put(t1, hm2.getOrDefault(t1,0)+1);
+        }
+        int ans=Integer.MAX_VALUE;
+        for(char t1: t.toCharArray()){
+            ans=Math.min(hm1.getOrDefault(t1,0)/hm2.getOrDefault(t1,0),ans);
+        }
+        System.out.println(ans);
+    }
+}
+
+
+INPUT:
+abacbc
+abc
+OUTPUT:
+2
