@@ -1,0 +1,46 @@
+/*  Understanding :- Given an array of size “N” ; in one operation ➖
+You can either select any two same elements and remove them from the array 
+You can select any three same elements from the array and remove them from the array 
+Your task is to destroy the full array in a minimum number of operations! 
+Example:- [1 1 1 2 2 2 2] 
+In first move you select 3 - “1”
+In second move you select 2 - “2”
+In third move you select 2 - “2”
+Total 3 moves selects the full array 
+According to Tariquddin’s law :-  if  the frequency of any number is 1 then the answer will be -1
+According to Yasika’s law :- If the frequency of all numbers is >=2 then the answer is always valid.
+It takes x/3 operations if x is divisible by 3 ; and takes x/3 + 1 operations if x is not divisible by 3 according to the pattern observed!   */
+
+
+
+import java.util.*;
+public class amazonOA2 {
+    public static int minnOps(int []arr){
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        for(int num: arr){
+            hm.put(num,hm.getOrDefault(num,0)+1);
+        }
+        int ans=0;
+        for(Map.Entry<Integer,Integer> entry: hm.entrySet()){
+            int freq=entry.getValue();
+            if(freq==1){
+                ans=-1;
+            }
+            else{
+                ans+=freq/3+(freq%3!=0?1:0);
+            }
+        }
+        return ans;
+    }
+    public static void main(String []args){
+        int[] arr = {1, 5, 5, 1, 1, 8, 8, 10,10};
+        int res=minnOps(arr);
+        if(res==-1){
+            System.out.println("Array cannot be destroy");
+        }
+        else{
+            System.out.println("Minimum operation to destoy array is" + " " + res);
+        }
+    }
+}
+OUTPUT: Minimum operation to destoy array is 4
