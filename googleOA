@@ -1,0 +1,42 @@
+//Given an array of size n; in 1 operation uh can change and a[i] to a[i]+x; uh can do these operations only 1 time on each index
+//Also x lies in range[-k,k] arr=[5,8,10] k=2 --> [5(5+0) 8(8+0) 10(10-2)] we can make only 2 index equals or [5(5+0) 8(8+2) 10(10+0)]
+//when k=3 5-->2 to 8 ; 8-->5 to 11 ; 10-->7 to 13 make an large empty array startig from index 1 for 5 _1111111 for 8 _1112222111 for 10 _111223322211
+
+
+import java.util.*;
+public class googlegirlOA {
+    public static void main(String [] args){
+        Scanner scanner = new Scanner(System.in);
+        long n = scanner.nextLong();
+        long[] a = new long[(int)(n + 1)];
+        long k = scanner.nextLong();
+        long i = 1;
+        while (i <= n) {
+            a[(int)i] = scanner.nextLong();
+            i++;
+        }
+        long[] b = new long[200005];
+        i=1;
+        while(i<=n){
+            long l=a[(int)i]-k;
+            long r=a[(int)i]+k;
+            b[(int)l]=b[(int)l]+1;
+            b[(int)(r+1)]=b[(int)(r+1)]-1;
+            i++;
+        }
+        long ans=1;
+        i=1;
+        while(i<=200000){
+            b[(int)i]=b[(int)(i-1)]+b[(int)i];
+            ans=Math.max(b[(int)i],ans);
+            i++;
+        }
+        System.out.println(ans);
+    }
+
+}
+INPUT:
+5 3 
+4 5 8 10 15
+OUTPUT:
+4
