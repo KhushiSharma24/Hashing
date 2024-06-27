@@ -1,0 +1,85 @@
+//Understanding :-> There are n events from timing [start.end] ; in each even a particular person is doing some action in that time bracket ;
+// we have to find the timing when everyone mentioned is free so they can have party for k minutes non stop
+//Analysis :-> We are given n intervals ; we have to find the first point where there is no interval such that k length distance is possible from that point
+//Observation1 :- It doesn't matter what is the name of person and what is  he doing all matters is time interval of work
+//Observation2 :- Convert all the time to minutes.
+
+
+
+import java.util.*;
+public class hackerrakOA {
+    static int convert(String s){
+        int u1=s.charAt(0)-'0';
+        int u2=s.charAt(1)-'0';
+        int v1=(u1*10+u2)*60;
+        u1=s.charAt(3)-'0';
+        u2=s.charAt(4)-'0';
+        v1=v1+(u1*10+u2);
+        return v1;
+    }
+    static void ck(int g){
+        int u=g/60;
+        int y=g%60;
+        if(u<=9){
+            System.out.print("0");
+            System.out.print(u);
+        }
+        else{
+            System.out.print(u);
+        }
+        System.out.print(":");
+        if(y<=9){
+            System.out.print("0");
+            System.out.print(y);
+        }
+        else{
+            System.out.print(y);
+        }
+    }
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int k=sc.nextInt();
+        int[] y=new int[1441];
+        for(int i=0;i<n;i++){
+            String a=sc.next();
+            String b=sc.next();
+            String v1=sc.next();
+            String v2=sc.next();
+            int t1=convert(v1);
+            int t2=convert(v2);
+            y[t1]++;
+            y[t2+1]--;
+        }
+        int i=1;
+        while(i<1440){
+            y[i]=y[i-1]+y[i];
+            i++;
+        }
+        int c=0;
+        int g=0;
+        for (int j = 0; j < 1440; j++) {
+            if (y[j] == 0) {
+                c++;
+                if (c == k) {
+                    ck(j - k + 1);
+                    g = 1;
+                    break;
+                }
+            }else {
+                c = 0;
+            }
+        }
+        if(g==0){
+            System.out.println("-1");
+        }
+    }
+}
+
+INPUT:
+2 60
+sam sleep 12:00 23:59
+al lunch 00:00 08:03
+
+OUTPUT:
+08:04
