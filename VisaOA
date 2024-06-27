@@ -1,0 +1,47 @@
+//: You are given an array of size “N”; all elements are 0 in it :)
+//You are given Q queries :-> [L,R] ; you have to add +1 to all the elements from [L,R]
+//-> After all queries are performed you have to print the final answer
+//y is now many lamps are touching those points
+//https://www.desiqna.in/16114/visa-oa-sde-intern-ctc-30-lac-27th-nov 
+
+
+import java.util.*;
+public class visaOA {
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int q=sc.nextInt();
+        int p=sc.nextInt();
+        int[] b=new int[100001];
+        for(int i=1;i<=q;i++) {
+            int l = sc.nextInt();
+            int r = sc.nextInt();
+            b[l] = b[l] + 1;
+            if(r + 1 <= n) {
+                b[r + 1] = b[r + 1] - 1;
+            }
+        }
+        for(int i=1;i<=n;i++){
+            b[i]=b[i-1]+b[i];
+        }
+        for(int i=1;i<=p;i++){
+            int y=sc.nextInt();
+            System.out.println(b[y]);
+        }
+    }
+}
+
+INPUT:
+15 3 6 
+1 7 
+5 11
+7 9 
+7 1 5 10 9 14
+
+OUTPUT:
+3
+1
+2
+1
+2
+0
