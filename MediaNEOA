@@ -1,0 +1,43 @@
+// You are given an integer array A of size N. Your task is to select exactly B elements from either the left end or the right end of the array A in order to maximize the sum of the selected elements.
+You are given an integer array A of size N where 1 <= N <= 10^5.
+You need to select exactly B elements from either the left end or the right end of the array A.
+The goal is to find and return the maximum possible sum of elements you can pick. //
+
+
+import java.util.*;
+public class MediaOA {
+    public static int fun(List<Integer> al,int B){
+        int n=al.size();
+        int [] suff=new int [n+1];
+        suff[n]=0;
+        suff[n-1]=al.get(n-1);                    //sum from the end of an array
+        for(int i=n-2;i>=0;i--){
+            suff[i]=al.get(i)+suff[i+1];
+        }
+        int prefix=0;
+        int ans=suff[n-B];
+        for(int i=0;i<B;i++){
+            prefix=prefix+al.get(i);               //sum for the first B elements 1 element lenge 
+            int suffSum=suff[n-B+(i+1)];           //sum for the remaining B elements toh idhr do element last ke element ka sum
+            ans=Math.max(ans,suffSum+prefix);
+        }
+        return ans;
+    }
+    public static int solve(List<Integer> al,int B){
+        return fun(al,B);
+    }
+
+
+    public static void main(String[] args){
+        ArrayList<Integer> al=new ArrayList<>();
+        al.add(5);
+        al.add(-2);
+        al.add(3);
+        al.add(1);
+        al.add(2);
+        int B = 3;
+        System.out.println(solve(al,B));
+    }
+}
+
+OUTPUT: 8
