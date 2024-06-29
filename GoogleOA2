@@ -1,0 +1,33 @@
+//Task given in problem is to Find Number of Pairs in array A, i and j such that A[A[A[i]]] == A[A[A[j]]]
+
+
+import java.util.*;
+public class GoogleOA2 {
+    public static void main(String [] args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int [] arr=new int[n+1];
+        for(int i=1;i<=n;i++){
+            arr[i]=sc.nextInt();
+        }
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        int i=1;
+        int count=0;
+        while(i<=n){
+            int RHS=arr[arr[arr[i]]];
+            int g=hm.getOrDefault(RHS,0);
+            count+=g;
+            int LHS=arr[arr[arr[i]]];
+            hm.put(LHS, hm.getOrDefault(LHS,0)+1);
+            i++;
+        }
+        System.out.println(count);
+    }
+}
+
+
+INPUT:
+4
+4 2 1 2 
+OUTPUT:
+6
