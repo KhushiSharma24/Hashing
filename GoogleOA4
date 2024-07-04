@@ -1,0 +1,54 @@
+/*  Given an array arr[] of size N and an integer S, the task is to find the count of quadruplets present in the given array having sum S. 
+
+Examples:
+Input: arr[] = {1, 5, 3, 1, 2, 10}, S = 20
+Output: 1
+Explanation: Only quadruplet satisfying the conditions is arr[1] + arr[2] + arr[4] + arr[5] = 5 + 3 + 2 + 10 = 20.
+
+Input: N = 6, S = 13, arr[] = {4, 5, 3, 1, 2, 4}
+Output: 3
+Explanation: Three quadruplets with sum 13 are: 
+arr[0] + arr[2] + arr[4] + arr[5] = 4 + 3 + 2 + 4 = 13
+arr[0] + arr[1] + arr[2] + arr[3] = 4 + 5 + 3 + 1 = 13
+arr[1] + arr[2] + arr[3] + arr[5] = 5 + 3 + 1 + 4 = 13         */
+
+
+import java.util.*;
+public class GoogleOA4 {
+    static int countSum(int a[],int n,int sum){
+        int co=0;
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        //arr[i] is the 3rd element
+        for(int i=0;i<n-1;i++){
+            // All possible 4th elements
+            for(int j=i+1;j<n;j++){
+                int temp=a[i]+a[j];
+                if(temp<sum && hm.containsKey(sum-temp)){
+                    co+=hm.get(sum-temp);
+                }
+            }
+            for(int j=0;j<i;j++){
+                // Store frequency of all possible
+                // sums of first two elements
+                int temp2=a[i]+a[j];
+                if(temp2<sum){
+                    if(hm.containsKey(temp2)){
+                        hm.put(temp2,hm.get(temp2)+1);
+                    }
+                    else{
+                        hm.put(temp2,1);
+                    }
+                }
+            }
+        }
+        return co;
+    }
+    public static void main(String[] args){
+          int arr[] = { 4, 5, 3, 1, 2, 4 };
+          int S = 13;
+          int N = arr.length;
+          System.out.print(countSum(arr, N, S));
+        }
+}
+
+OUTPUT: 3
