@@ -1,0 +1,82 @@
+/*  For each string at index “i” you have to print the sum of matching characters of string “i” with string - “i+1” “i+2” “i+3” “i+4” “i+5” …… and so on. 
+Sample Input - 
+N = 5 
+[bbz,
+zaz,
+aaa,
+zaa,
+zzz] 
+O/P - [2,5,2,1,0]
+1<=N<=100000
+Sum of all string length<=100000
+
+
+import java.util.*;
+public class UberOA {
+    public List<Integer> matchingCnt(int n, List<String> X) {
+        int [][] g=new int[200005][28];
+        List<Integer> p=new ArrayList<>();
+        for(int i=0;i<n;i++) {
+            p.add(0);
+        }
+        for(int i=n-1;i>=0;i--) {
+            String u = X.get(i);
+            int co = 0;
+            int d = u.length();
+            for (int j = 0; j < d; j++) {
+                int y = u.charAt(j) - 'a';
+                co = co + g[j][y];
+                g[j][y] = g[j][y] + 1;
+            }
+            p.set(i,co);
+        }
+        return p;
+
+    }
+    public static void main(String[] args) {
+        //EFFICIENT METHOD
+        UberOA sol = new UberOA();
+        int n = 3;
+        List<String> X = Arrays.asList("abc", "ade", "abc");
+        List<Integer> result = sol.matchingCnt(n, X);
+
+        for (int i : result) {
+            System.out.print(i + " ");
+        }
+    
+
+        //BRUTE FORCE APPROACH
+//        int n = 3;
+//        String[] g = {"abc", "ade", "abc"};
+//        int[] final_answer = new int[n];
+//        for (int i = n - 1; i >= 0; i--) {
+//                int ans=0;
+//                if(i!=n-1){
+//                    for(int j=i+1;j<n;j++){
+//                        int co=matching(g[i],g[j]);
+//                        int ans+=co;
+//
+//                    }
+//                }
+//                final_answer[i]=ans;
+//        }
+//        for(int i=0;i<n;i++){
+//            System.out.println(final_answer[i] + " ");
+//        }
+//
+//    }
+//    private static int matching(String a, String b) {
+//        int matchCount = 0;
+//        for (int i = 0; i < Math.min(a.length(), b.length()); i++) {
+//            if (a.charAt(i) == b.charAt(i)) {
+//                matchCount++;
+//            } else {
+//                break;
+//            }
+//        }
+//        return matchCount;
+
+      }        
+}
+
+OUTPUT: 4 1 0
