@@ -1,0 +1,41 @@
+// Given an array of size “N”; find the shortest subarray such that the sum of first and element of the subarray is “k” (Subarray should at least be of size>=2)
+//->[5 6 7 8 10 4 3 2 1] K = 8
+//-> 7.
+
+
+import java.util.*;
+public class AmazonOA3 {
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] b=new int[n+1];
+        for(int i=1;i<=n;i++){
+            b[i]=sc.nextInt();
+        }
+        int k= sc.nextInt();
+        int u=Integer.MAX_VALUE;
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        for(int j=1;j<=n;j++){
+            int end=b[j];
+            int start=k-end;
+            if(hm.containsKey(start)){
+                int i=hm.get(start);
+                int l=j-i+1;
+                u=Math.min(u,l);
+            }
+            //For Longest Subarray
+            //if(!hm.containsKey(end)){
+            //     hm.put(end,j)
+            // }
+            hm.put(end,j);
+        }
+        System.out.println(u);
+    }
+}
+
+INPUT:
+9
+5 6 7 8 10 4 3 2 1
+8
+OUTPUT:
+7
