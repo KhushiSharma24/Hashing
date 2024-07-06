@@ -1,0 +1,31 @@
+  //if element in array are dupliacte we use hashmap(o(n+m))
+  //Approach
+  //Then we can iterate over arr2 and check if that number exists in our hashmap or not.
+  // If the element is present in hashmap and the frequency is greater than 0 we simply subtract 1 from the frequency and move further.
+  // If that number doesn't exist or it's frequency is 0 then we can return false stating this element doesn't exist in arr1 
+  // or its frequency in arr1 is less than its frequency in arr2. If we've iterated over all the elements of arr2 we can then return true.
+
+
+import java.util.*;
+
+public class subserHashing {
+    public static void main(String[] args){
+        //if element in array are not duplicate
+        int [] arr1={1,2,3,4,5,6};
+        int [] arr2={4,6};
+        Set<Integer> hs=new HashSet<>();
+        for(int i=0;i<arr1.length;i++){
+            hs.add(arr1[i]);
+        }
+        for(int i=0;i<arr2.length;i++){
+            if(!hs.contains(arr2[i])){
+                System.out.println("not subset");
+                break;
+            }
+
+        }
+        System.out.println("subset");
+    }
+}
+
+OUTPUT: Subset
