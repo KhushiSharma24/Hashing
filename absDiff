@@ -1,0 +1,24 @@
+// Count all i,j pairs where i<j and abs(b[i]-b[j]) = k [k>=0]
+
+
+import java.util.*;
+public class absDiff {
+    public static void main(String [] args){
+        int[] b = {1, 5, 3, 4, 2};
+        int k = 2;
+        int co=0;
+        Map<Integer,Integer> hm=new HashMap<>();
+        for(int i=0;i<b.length;i++){
+            if(hm.containsKey(b[i]-k)){
+                co+=hm.get(b[i]-k);            //kyuki uss element ki freq pta hogi toh utni freq count m + ho jygi
+            }
+            if(k!=0 && hm.containsKey(b[i]+k)){
+                co+=hm.get(b[i]+k);
+            }
+            hm.put(b[i],hm.getOrDefault(b[i],0)+1);
+        }
+        System.out.println(co);
+    }
+}
+
+OUTPUT: 3
