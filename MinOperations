@@ -1,0 +1,37 @@
+// Minimum operations to make all elements equal in an array.
+// We can minimize the work done in the above approach by using a hash map.
+// A hash map is nothing but a map that consists of the frequency of all the elements in the array.
+// The highest frequent element in the hash table will be our target element and thus, our answer will be "number of elements - frequency of the target element".
+//Consider an array {1 , 2, 1, 4, 3, 1}.
+//First, we map the elements with their frequency:
+//As we can see, the element "1" has the highest frequency of 3, and this element will be our target element. Therefore, our answer will be,
+//Number of elements - Frequency of 1 = 6 - 3 = 3.
+//Time complexity: O(n)
+//Space complexity: O(n)
+
+
+import java.util.*;
+public class miniOperations {
+    public static void main(String [] args){
+        int [] arr={1,2,1,1,4,3,2};
+        Map<Integer,Integer> hm=new HashMap<>();
+        for(int i=0;i<arr.length;i++){
+            if(hm.containsKey(arr[i])){
+                hm.put(arr[i],hm.get(arr[i])+1);
+            }
+            else{
+                hm.put(arr[i],1);
+            }
+        }
+        int maxFreq=0;
+        for(Map.Entry<Integer,Integer> entry: hm.entrySet()){
+            int freq=entry.getValue();
+            if(freq>maxFreq){
+                maxFreq=freq;
+            }
+        }
+        System.out.println(arr.length-maxFreq);
+    }
+}
+
+OUTPUT: 4
