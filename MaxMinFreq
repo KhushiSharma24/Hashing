@@ -1,0 +1,38 @@
+/*  We are given an Array of Numbers. We have to find and print any Number with Maximum Frequency and Minimum Frequency.
+    Example Testcase:-
+    Arr = [3, 2, 3, 2, 4, 3]
+    Frequencies of Elements of Array are:-
+    3 - 3
+    2 - 2
+    4 - 1
+    Maximum Frequency:- Element is 3, Frequency is 3
+    Minimum Frequency:- Element is 4, Frequency is 1      */
+
+
+import java.util.*;
+public class maxMin {
+    public static void main(String[] args){
+        int [] arr={1,2,3,4,1,2,1,2,2,3,3};
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        for(int i=0;i<arr.length;i++){
+            hm.put(arr[i],hm.getOrDefault(arr[i],0)+1);
+        }
+        int max=Integer.MIN_VALUE;
+        int min=Integer.MAX_VALUE;
+        int maxE=0;
+        int minE=0;
+        for(Map.Entry<Integer,Integer> me:hm.entrySet()){
+            if(me.getValue()>max){
+                max=me.getValue();
+                maxE=me.getKey();
+            }
+            if(me.getValue()<min){
+                min=me.getValue();
+                minE=me.getKey();
+            }
+        }
+        System.out.println(maxE+ " " +minE);
+    }
+}
+
+OUTPUT: 2  4
