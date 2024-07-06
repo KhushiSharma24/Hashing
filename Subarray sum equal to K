@@ -1,0 +1,24 @@
+//Find count of number of subarrays with sum ==  k 
+
+
+import java.util.*;
+public class subarraySum {
+    public static void main(String [] args){
+        int[] arr = {1, 2, 3, 4, 5};
+        int k = 5;
+        int sum=0;
+        int co=0;
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        hm.put(0,1);
+        for(int num: arr){
+            sum+=num;
+            if(hm.containsKey(sum-k)){
+                co+=hm.get(sum-k);
+            }
+            hm.put(sum,hm.getOrDefault(sum,0)+1);
+        }
+        System.out.println(co);
+    }
+}
+
+OUTPUT: 2
