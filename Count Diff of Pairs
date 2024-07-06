@@ -1,0 +1,22 @@
+ // Count All ((i,j) pairs such that b[i] - b[j] == k (count of such pairs.) [i<j]
+
+
+import java.util.*;
+public class countDiff {
+    public static void main(String [] args){
+        int[] b = {1, 5, 3, 4, 2};
+        int k=2;
+        int co=0;
+        Map<Integer,Integer> hm=new HashMap<>();
+        for(int i=0;i<b.length;i++){
+            int temp=b[i]+k;
+            if(hm.containsKey(temp)){
+                co+=hm.get(temp);
+            }
+            hm.put(b[i],hm.getOrDefault(b[i],0)+1);
+        }
+        System.out.println(co);
+    }
+}
+
+OUTPUT: 2
